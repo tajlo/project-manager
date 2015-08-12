@@ -3,87 +3,123 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Project Manager </title>
+    <title> prjkt managr </title>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/foundation.css" />
+    <link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="timeline.css">
+    <link rel="stylesheet" href="side-bar.css">
+    <link rel="stylesheet" href="index.css"/>
     <script src="js/vendor/modernizr.js"></script>
   </head>
   <body ng-controller="ManagerController">
+
+  <div class="off-canvas-wrap move-right" data-offcanvas>
+  <div class="inner-wrap">
+
+    <a class="left-off-canvas-toggle" href="#"><i class="fi-list"></i></a>
+
+    <!-- Off Canvas Menu -->
+    <aside class="left-off-canvas-menu">
+      
+      <div class="icon-bar vertical five-up">
+      <a class="item" ng-click="viewType = 'active'">
+        <i class="fi-home"></i>
+        <label>Home</label>
+      </a>
+      <a class="item"  ng-click="viewType = 'active2'">
+       <i class="fi-plus"></i>
+        <label>add</label>
+      </a>
+      <a class="item">
+        <i class="fi-x" ng-click="viewType = 'active3'"></i>
+        <label>delete</label>
+      </a>
+    </div>
+      
+    </aside>
+
+</div>
+
+<div class="row"  >
+  <div class="small-12 columns big">
+    <span class="header"><i class="fi-pencil"></i> prjkt</span> <span class="header2">managr</span>
+  </div>
+</div>
   
-	<div class ="panel">
-	  <div class="row">
-		<div class="large-8 columns">
-			<h1>Project Manager</h1>
-		</div>
-		<div class="large-4 columns">
-			<p> Managing your tasks made easy.  Create your task description. Set a time limit in minutes, hours, or days. Add a deadline with a time. </p>
-		</div>
-	 </div>
-	</div>
+<div  ng-show="viewType === 'active2'" >
+  
 
-  	<div class="row">
-  		<div class="large-4 columns">
-  			<label> Task Name
-  				<input type="text" id= "task-name" />
-  			</label>
-  		</div>
+  <form>
+  <div class="row">
+    
+    <div class="small-12 columns">
+        <label>What do you need to do?
+           <textarea id= "task-name" ></textarea>
+        </label>
+    </div>
 
-  		<div class="large-1 columns">
-  			<label> Duration
-  				<input type="number" id ="time" /> 
-  			</label>
-  		</div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+        <label>How much time ? 
+         <select ng-model="numbers"/> 
+          <option value ="0" disabled selected>0</option>
+          <option ng-repeat="number in numbers" value="{{number}}">{{number}}</option>
+         </select>
+          <select class="verb-dropdown">
+          <option value="min" selected>min(s)</option>
+          <option value="hour(s)">hour(s)</option>
+          <option value="day(s)">day(s)</option>
+        </select> 
+      </label>
+    </div>
+   </div>
 
-  		<div class="large-2 columns">
-  			<label> Unit
-  				<select id ="unit" >
-					<option value="min">min</option>
-					<option value="hour(s)">hr(s)</option>
-					<option value="day(s)">day(s)</option>
-				</select>
-  			</label>
-  		</div>
+   <div class="row">
+    
+      <div class="small-12 columns">
+          <label>What's the deadline?  
+            <input type="datetime-local" id="date"/>
+          </label>    
+      </div>
+    </div>
 
-  		<div class="large-3 columns">
-  			<label> Deadline
-  				<input type="datetime-local" id="date"/>
-  			</label>
-  		</div>
-
-  		<div class="large-2 columns">
-  		   </br>
-  			<div class="button tiny " ng-click="save()"> Save </div>
-  			
-  		</div>
-  		
-  	</div>
+    <div class="row">
+      <div class="small-12 columns">
+        <label>
+         <div class="button tiny " ng-click="save()"> Save </div>
+        </label>
+     </div>
+    </div>
+</form>
+  
+</div>
 
 
-  	<div class="row border"  ng-model="data" ng-repeat="project in data | orderBy :'-deadline'">
-  		
-	  		<div class ="large-3 columns">
-	  			<strong>Created</strong>
-	  			<div>
-	  			 {{project.created | date:'EEEE'}} {{project.created | date:'longDate'}}
-	  			</div>	
-		  	</div>
+<div class="path-container"  ng-hide= "viewType === 'active2'" ng-model="data" ng-repeat="tasks in data | orderBy: ' -deadline' ">
+  
+  <div class="row path-item">
+ 
+    <div class="large-8 columns" ng-class-even="push-4 ">
+      <div class="circle" ng-class-odd="'circle-left'" ng-class-even="'circle-right right'" > {{tasks.created | date : 'EEE'}}</div>
+    </div>
+    <div class="large-4 columns path-text" ng-class-even="'pull-8 left'" ng-class-odd="'right'" >
+       
+      <h3> {{tasks.created | date : 'MM.dd'}} <i class="fi-x" ng-show="viewType === 'active3'" ng-click="deleted($index)"></i></h3>
+      <p >{{tasks.taskName}}</p>
+      <span><i class="fi-clock"></i> {{tasks.time}}</span><span class="deadline"><i class="fi-alert"></i> {{tasks.deadline | date: 'longDate'}}</span>
+    </div>
+  </div>
+  
+  <span class="hide-for-small"></span>
+</div>
 
-		  	<div class ="large-3 columns">
-				 <strong>Description</strong>
-				 <div>{{project.taskName}} </div>
-			</div>
-
-			<div class ="large-3 columns">
-				<strong>Duration</strong>
-				<div>{{project.time}}{{project.unit}} </div>
-			</div>
-
-			<div class ="large-3 columns">
-				<strong>Deadline</strong>
-				<div>{{project.deadline | date: 'medium'}}</div>
-			</div>
-	
-  	</div>
-
+  
+  <span class="hide-for-small"></span>
+</div>
 
 
 

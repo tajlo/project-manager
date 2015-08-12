@@ -1,0 +1,100 @@
+/*------------------------------------
+ timeline styles
+------------------------------------*/
+.path-container {
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+.path-container .path-item h1 {
+  text-align: center;
+  margin-bottom: 70px;
+}
+.path-container .path-item h3 {
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
+.path-container .path-item p {
+  font-size: emCalc(16px);
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+.path-container .path-item a {
+  font-weight: bold;
+  font-size: emCalc(14px);
+}
+.path-container .path-item .circle {
+  font-size: 116px;
+  position: relative;
+  margin-bottom: 50px;
+  z-index: 2;
+ 
+ 
+}
+
+.circle-left{
+  text-align: right; 
+  background-color: white; 
+  color: black;
+}
+
+
+
+
+/*------------------------------------
+ medium timeline styles
+------------------------------------*/
+@media only screen and (max-width: 800px) and (min-width: 768px) {
+
+
+  .large-5.columns.path-text {
+    width: 70%;
+    margin-left: 15px;
+  }
+
+  .path-item .large-7 {
+    width: 25%;
+  }
+
+  .push-5 {
+    left: 0;
+    float: right;
+  }
+
+  .circle-right {
+    float: right;
+    left: 80px ;
+  }
+
+  .circle-left {
+    left: 80px ;
+  }
+}
+/*------------------------------------
+ mobile timeline styles
+------------------------------------*/
+@media only screen and (max-width: 767px) {
+  .path-container {
+    text-align: left;
+  }
+  .path-container .circle {
+    top: 0;
+    right: 0;
+    left: 0;
+    float: none;
+    margin-bottom: 30px !important;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .path-container .path-item p{
+  font-size: emCalc(10px);
+  line-height: 1.4;
+  margin-bottom: 25px;
+  margin-left: 70px;
+  }
+  .path-container .path-item span{
+     margin-left: 70px;
+  }
+
+
+}
