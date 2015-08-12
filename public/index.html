@@ -65,11 +65,11 @@
   <div class="row">
     <div class="small-12 columns">
         <label>How much time ? 
-         <select ng-model="numbers"/> 
+         <select id= "time" ng-model="numbers"/> 
           <option value ="0" disabled selected>0</option>
           <option ng-repeat="number in numbers" value="{{number}}">{{number}}</option>
          </select>
-          <select class="verb-dropdown">
+          <select id="unit" class="verb-dropdown">
           <option value="min" selected>min(s)</option>
           <option value="hour(s)">hour(s)</option>
           <option value="day(s)">day(s)</option>
